@@ -376,117 +376,53 @@ When the path points to a file, it doesn't open it in a new tab but instead init
 
 ### Class Functions
 
-Data model class functions can be linked to events, utilizing parameters from datasources or static values, with the option to assign the result to a datasource as needed. To bind class functions with events, follow these steps:
-
-1. <Column.List align="center" justifyContent="between">
-	<Column.Item width="55%">
-        <strong>Select and Assign</strong>: <a href="#adding-an-event" >Add an event</a>, and then assign a class function to your chosen component or datasource by clicking <code>Add a Function Event</code>.
-	</Column.Item>
-	<Column.Item width="40%">
-		<img alt="explorer" src={require('./img/contextualPanel_addFuctionEvent.png').default} style={{borderRadius: '6px'}} />
-	</Column.Item>
-</Column.List>
-
-2. **Select a Function**: Browse the available functions and select an appropriate class function. You can link the following class functions to events:
-
-    <Column.List align="center" justifyContent="between">
-        <Column.Item width="55%">
-            <ul>
-                <li>Exposed <a href="../../orda/data-model#datastoreimplementation-class">datastore class functions</a> distinguishable by the keyword <code>Datastore</code>.</li>
-            </ul>
-        </Column.Item>
-        <Column.Item width="40%">
-            <img alt="explorer" src={require('./img/keyword_Datastore.png').default} style={{borderRadius: '6px'}} />
-        </Column.Item>
-    </Column.List>
-
-    <Column.List align="center" justifyContent="between">
-        <Column.Item width="55%">
-            <ul>
-                <li>Exposed <a href="../../orda/data-model#dataclass-class">dataclass class functions</a> distinguishable by the keyword <code>Dataclass Name</code>.</li>
-            </ul>
-        </Column.Item>
-        <Column.Item width="40%">
-            <img alt="explorer" src={require('./img/keyword_Dataclass.png').default} style={{borderRadius: '6px'}} />
-        </Column.Item>
-    </Column.List>
-
-    <Column.List align="center" justifyContent="between">
-        <Column.Item width="55%">
-            <ul>
-                <li>Exposed <a href="../../orda/data-model#entity-class">entity class functions</a> and <a href="../../orda/data-model#entityselection-class">entity selection class functions</a>, distinguished by the <code>Namespace Of Datasource</code> keyword, encompass shared functions when these entities serve as shared datasources.</li>
-            </ul>
-        </Column.Item>
-        <Column.Item width="40%">
-            <img alt="explorer" src={require('./img/keyword_Namespace.png').default} style={{borderRadius: '6px'}} />
-        </Column.Item>
-    </Column.List>
-
-<br/>
-
-:::tip
 <Column.List align="center" justifyContent="between">
 	<Column.Item width="55%">
-        You can choose to display the function prototype in either table (default) or line format. To switch between these displays, simply click the expand icon <img alt="explorer" src={require('./img/expand.png').default} style={{borderRadius: '6px', width:'5%'}} /> located in the upper right corner of the area.
+        Data model class functions can be linked to events, utilizing parameters from datasources or static values, with the option to assign the result to a datasource as needed. After binding a class function with an event, follow these steps:
 	</Column.Item>
 	<Column.Item width="40%">
-		<img alt="explorer" src={require('./img/toggleFunctionPrototype.png').default} style={{borderRadius: '6px'}} />
+		<img src={require('./img/contextualPanel_addNavigationEvent.png').default} style={{borderRadius: '6px'}} />
 	</Column.Item>
 </Column.List>
-:::
 
-<br/>
+1. **Select a Function**: Browse the available functions and select an appropriate class function. You can link events to various types of class functions, including datastore class functions, dataclass class functions, entity class functions, and entity selection class functions.
 
-3. **Pass Parameters**: After selecting a class function, Qodly Studio automatically parses it, extracting its declared prototype. This allows you to visualize and configure its parameter(s) and return value. You can enhance the functionality of class functions by configuring parameters in two ways using the toggle <img alt="explorer" src={require('./img/datasourceToggle.png').default} style={{borderRadius: '6px', width:'5%'}} /> to define how the [function parameter(s)](#parameter-handling) should be filled, including the option to have [variadic parameters](#variadic-parameters).
+2. **Pass Parameters**: After selecting a class function, Qodly Studio automatically parses it, extracting its declared prototype. This allows you to visualize and configure its parameter(s) and return value. You can enhance the functionality of class functions by configuring parameters in two ways using the toggle <img alt="explorer" src={require('./img/datasourceToggle.png').default} style={{borderRadius: '6px', width:'5%'}} /> to define how the [function parameter(s)](#parameter-handling) should be filled, including the option to have [variadic parameters](#variadic-parameters).
 
 
-4. **Select a Datasource for the returned result**: In the return parameter section, choose a datasource to store the function's returned result. <br/>
+3. **Select a Datasource for the returned result**: In the return parameter section, choose a datasource to store the function's returned result. <br/>
     <Column.List align="center" justifyContent="between">
         <Column.Item width="55%">
             <ul>
-                <li>If your class function defines a specific name for the result, that name will be displayed in the label within the return parameter section. For example, if you have a function like <code> exposed function toggleComponent() -> isComponentVisible: boolean</code>, the result label would be <code>isComponentVisible</code>.</li> <br/>
-                <li>However, if your class function does not specify a result name, the default label <code>$0</code> will be used in the return parameter section.</li>
+                <li>If your class function defines a specific variable for the result, its name will be displayed in the label within the return parameter section. </li> <br/>
+                <li>However, if your class function does not specify a result name, the default label <code>result</code> will be used in the return parameter section.</li>
             </ul>
         </Column.Item>
         <Column.Item width="40%">
-            <img alt="explorer" src={require('./img/returnValue_$0.png').default} style={{borderRadius: '6px'}} />
-            <br/><br/><br/><br/><br/>
-            <img alt="explorer" src={require('./img/returnValue_named.png').default} style={{borderRadius: '6px'}} />
+            <img src={require('./img/returnValue_named.png').default} style={{borderRadius: '6px'}} />
+            <br/><br/><br/>
+            <img src={require('./img/returnValue_result.png').default} style={{borderRadius: '6px'}} />
         </Column.Item>
     </Column.List>
 
 <br/>
 
-:::tip
-
-<Column.List align="center" justifyContent="between">
-	<Column.Item width="60%">
-		When you make modifications to the function prototype in the code editor, such as adding or removing parameters or changing their types, and you want these changes to be applied to the Action configuration area, you can easily do so by clicking the Refresh button. Qodly will then re-parse the function prototype to reflect the updated information while preserving the already assigned data sources as parameters.
-	</Column.Item>
-	<Column.Item width="35%">
-		<img alt="explorer" src={require('./img/refreshFunction.png').default} style={{borderRadius: '6px'}} />
-	</Column.Item>
-</Column.List>
-:::
-
-<br/>
-
-5. <Column.List align="center" justifyContent="between">
+4. <Column.List align="center" justifyContent="between">
 	<Column.Item width="55%">
 		<strong>Add Parameter</strong>: If your function accepts a <a href="../../language/basics/lang-parameters#optional-parameters">variable number of parameters</a>, you can use this button to declare and bind one or more appropriate parameter(s). They will be passed to the function in the defined order when called for the event.
 	</Column.Item>
 	<Column.Item width="40%">
-		<img alt="explorer" src={require('./img/contextualPanel_addParam.png').default} style={{borderRadius: '6px'}} />
+		<img src={require('./img/contextualPanel_addParam.png').default} style={{borderRadius: '6px'}} />
 	</Column.Item>
 </Column.List>
 
 
-6. <Column.List align="center" justifyContent="between">
+5. <Column.List align="center" justifyContent="between">
 	<Column.Item width="55%">
 		<strong>Provide Feedback</strong>: Enable the <code>Provide Feedback</code> checkbox to display backend feedback on the user interface. For more detailed information, refer to the <a href="#providing-feedback">Provide Feedback</a> section. 
 	</Column.Item>
 	<Column.Item width="40%">
-		<img alt="explorer" src={require('./img/contextualPanel_provideFeedback.png').default} style={{borderRadius: '6px'}} />
+		<img src={require('./img/contextualPanel_provideFeedback.png').default} style={{borderRadius: '6px'}} />
 	</Column.Item>
 </Column.List>
 
@@ -554,7 +490,7 @@ There are two primary methods for ensuring precise parameter handling: Hardcoded
 
 <Column.List align="center" justifyContent="between">
     <Column.Item width="50%">
-        Utilize the <code>...</code> notation in function prototypes to handle a <a href="">variable number of parameters</a>.
+        Utilize the <code>...</code> notation in function prototypes to handle a <a href="../../language/basics/lang-parameters#declaring-variadic-parameters">variable number of parameters</a>.
     </Column.Item>
     <Column.Item width="45%">
         <img alt="explorer" src={require('./img/variadic1.png').default} style={{borderRadius: '6px'}} />
@@ -599,7 +535,6 @@ There are two primary methods for ensuring precise parameter handling: Hardcoded
     </Column.Item>
 </Column.List>
 :::
-
 
 ## Providing feedback
 
