@@ -11,6 +11,8 @@ A [Datastore](../orda/data-model.md#datastore) is the interface object provided 
 ||
 |---|
 |[<!-- INCLUDE #_command_.ds.Syntax -->](#ds)&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.ds.Summary -->|
+|[<!-- INCLUDE #_command_.openDatastore.Syntax -->](#opendatastore)&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.openDatastore.Summary -->|
+
 
 
 
@@ -74,28 +76,13 @@ Using the datastore on the Qodly database:
 
 #### Description
 
-The `openDatastore` command <!-- REF #_command_.openDatastore.Summary -->connects the application to a remote database identified by the *connectionInfo* parameter<!-- END REF --> and returns a matching `cs.DataStore` object associated with the *localID* local alias.
+The `openDatastore` command <!-- REF #_command_.openDatastore.Summary -->connects the application to a remote datastore identified by the *connectionInfo* parameter<!-- END REF --> and returns a matching `cs.DataStore` object associated with the *localID* local alias. All objects exposed in the remote datastore are available as properties of the `cs.DataStore` returned object.
 
-The *connectionInfo* remote datastore must be a 4D Server database with the following configuration:
+The configuration of parameters depends on the target datastore. In the current Qodly implementation, the following target datastore is supported:
 
-* its web server must be launched with http and/or https enabled,
-* its [**Expose as REST server**](https://developer.4d.com/docs/REST/configuration#starting-the-rest-server) option must be checked,
-* at least one client license is available.
+- 4D Server 
 
-If no matching database is found, `openDatastore` returns **Null**.
-
-*localID* is a local alias for the session opened on remote datastore. If *localID* already exists on the application, it is used. Otherwise, a new *localID* session is created when the datastore object is used.
-
-All objects [exposed in the remote 4D datastore](https://developer.4d.com/docs/ORDA/ordaClasses) (dataclasses, attributes, functions) are available as properties of the `cs.DataStore` object.
-
-Once the session is opened on the remote datastore, the following statements become equivalent and return a reference on the same datastore object:
-
-```qs
- var mysd, myds2 : cs.DataStore
- myds = openDatastore(connectionInfo,"myLocalId")
- myds2 = ds("myLocalId")
-  //myds and myds2 are equivalent
-```
+### Opening a 4D Server datastore
 
 Pass in *connectionInfo* an object describing the remote datastore you want to connect to. It can contain the following properties (all properties are optional except *hostname*):
 
@@ -108,49 +95,74 @@ Pass in *connectionInfo* an object describing the remote datastore you want to c
 |tls|boolean|Use secured connection (2). If omitted, false by default. Using a secured connection is recommended whenever possible.|
 |type |string |If passed, must be "4D Server"|
 
-(1) See the [4D Server documentation](https://developer.4d.com/docs/REST/authUsers) to know how to authentify REST connection requests
+(1) See the [4D Server documentation](https://developer.4d.com/docs/REST/authUsers) to know how to authenticate REST connection requests
 
 (2) If `tls` is `true`, the HTTPS protocol is used if:
 
 * HTTPS is enabled on the remote datastore
 * the given port is the right [HTTPS port](https://developer.4d.com/docs/WebServer/webServerConfig#https-port) configured in the remote datastore settings
-* a valid certificate and private encryption key are installed in the project. Otherwise, error "1610 - A remote request to host xxx has failed" is raised.
-* 
+* a valid certificate and private encryption key are installed in the project. Otherwise, an error "1610 - A remote request to host xxx has failed" is raised.
+
+:::note 4D Server configuration
+
+The *connectionInfo* remote datastore designates a 4D Server database with the following configuration:
+
+* its web server must be launched with http and/or https enabled,
+* its [**Expose as REST server**](https://developer.4d.com/docs/REST/configuration#starting-the-rest-server) option must be checked,
+* at least one client license is available.
+
+If no matching 4D Server database is found, `openDatastore` returns **null**.
+
+:::
+
+*localID* is a local alias for the session opened on remote datastore. If *localID* already exists on the application, it is used. Otherwise, a new *localID* session is created when the datastore object is used. For a detailed description of remote session support on 4D Server, please refer to the [4D documentation](https://developer.4d.com/docs/ORDA/datastores). 
+
+Once the session is opened on the remote datastore, the following statements become equivalent and return a reference on the same datastore object:
+
+```qs
+ var mysd, myds2 : cs.DataStore
+ myds = openDatastore(connectionInfo,"myLocalId")
+ myds2 = ds("myLocalId")
+  //myds and myds2 are equivalent
+```
 
 #### Example 1  
 
 Connection to a remote datastore without user / password:
 
-```4d
+```qs
  var connectTo : object
  var remoteDS : cs.DataStore
- var howMany : integer
+ var allStudents : cs.StudentsSelection
  connectTo = {"type","4D Server","hostname","192.168.18.11:8044"}
  remoteDS = openDatastore(connectTo , "students")
- howMany = remoteDS.Students.all().length 
+ allStudents = remoteDS.Students.all() 
 ```
 
 #### Example 2
 
 Connection to a remote datastore with user / password / timeout / tls:
 
-```4d
- var $connectTo : Object
- var $remoteDS : cs.DataStore
- $connectTo:=New object("type";"4D Server";"hostname";\"192.168.18.11:4443";\  
-  "user";"marie";"password";$pwd;"idleTimeout";70;"tls";True)
- $remoteDS:=Open datastore($connectTo;"students")
- ALERT("This remote datastore contains "+String($remoteDS.Students.all().length)+" students")
+```qs
+ var connectTo : object
+ var remoteDS : cs.DataStore
+ var allStudents : cs.StudentsSelection
+ connectTo = {"type","4D Server","hostname","192.168.18.11:4443",\  
+  "user","marie","password",pwd,"idleTimeout",70,"tls",true}
+ remoteDS = openDatastore(connectTo , "students")
+ allStudents = remoteDS.Students.all()
 ```
 
 #### Example 3  
 
 Working with several remote datastores:
 
-```4d
- var $connectTo : Object
- var $frenchStudents; $foreignStudents : cs.DataStore
- $connectTo:=New object("hostname";"192.168.18.11:8044")
+```qs
+ var connectTo : object
+ var frenchStudents, foreignStudents : cs.DataStore
+ var allFrenchStudents, allForeignStudents : cs.StudentsSelection
+
+ connectTo = {"hostname";"192.168.18.11:8044")
  $frenchStudents:=Open datastore($connectTo;"french")
  $connectTo.hostname:="192.168.18.11:8050"
  $foreignStudents:=Open datastore($connectTo;"foreign")
@@ -160,7 +172,7 @@ Working with several remote datastores:
 
 #### Error management  
 
-In case of error, the command returns **Null**. If the remote datastore cannot be reached (wrong address, web server not started, http and https not enabled...), error 1610 "A remote request to host XXX has failed" is raised. You can intercept this error with a method installed by `ON ERR CALL`.
+In case of error, the command returns **null**. If the remote datastore cannot be reached (wrong address, web server not started, http and https not enabled...), error 1610 "A remote request to host XXX has failed" is raised. You can intercept this error with a method installed by `onErrCall`.
 
 
 
