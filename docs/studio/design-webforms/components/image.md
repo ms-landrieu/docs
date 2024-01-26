@@ -50,6 +50,10 @@ For instance, if you've uploaded an image named "booking.png", you can set the i
 
 <br/>
 
+- **Default Image**: Placeholder picture displayed in the webform when an image cannot be loaded in the component. It is the case when the component is bound to an image attribute and the attribute is empty in some entities. 
+
+<br/>
+
 - **Direct Image Upload**: The Image component simplifies the process of adding new images. By clicking on the image component and uploading the desired picture, the image is automatically added to the Shared folder's <code>/$shared/assets/images</code> subdirectory. The component's image source is updated accordingly.
 
 <br/>
