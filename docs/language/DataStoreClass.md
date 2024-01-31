@@ -78,7 +78,7 @@ Using the datastore on the Qodly database:
 
 The `openDatastore` command <!-- REF #_command_.openDatastore.Summary -->connects the application to a remote datastore identified by the *connectionInfo* parameter<!-- END REF --> and returns a matching `cs.DataStore` object associated with the *localID* local alias. All objects exposed in the remote datastore are available as properties of the `cs.DataStore` returned object.
 
-The configuration of parameters depends on the target datastore. In the current Qodly implementation, the following target datastore is supported:
+The configuration of parameters depends on the target datastore. In the current Qodly implementation, the following target datastore type is supported:
 
 - 4D Server 
 
@@ -109,7 +109,8 @@ The *connectionInfo* remote datastore designates a 4D Server database with the f
 
 * its web server must be launched with http and/or https enabled,
 * its [**Expose as REST server**](https://developer.4d.com/docs/REST/configuration#starting-the-rest-server) option must be checked,
-* at least one client license is available.
+* at least one client license is available,
+* run with 4D Server v20 or higher.
 
 If no matching 4D Server database is found, `openDatastore` returns **null**.
 
