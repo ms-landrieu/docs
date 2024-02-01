@@ -71,7 +71,7 @@ Using the datastore on the Qodly database:
 |Parameter|Type||Description|
 |---|---|---|---|
 |connectionInfo|object|->|Connection properties used to reach the remote datastore|
-|localID |text|->|Id to assign to the opened datastore on the local application (mandatory)|
+|localID |text|->|Id to assign to the opened datastore on the current Cloud instance (mandatory)|
 |Result |cs.DataStore|<-|Datastore object|<!-- END REF -->
 
 #### Description
@@ -116,7 +116,7 @@ If no matching 4D Server database is found, `openDatastore` returns **null**.
 
 :::
 
-*localID* is a local alias for the session opened on remote datastore. If *localID* already exists on the application, it is used. Otherwise, a new *localID* session is created when the datastore object is used. For a detailed description of remote session support on 4D Server, please refer to the [4D documentation](https://developer.4d.com/docs/ORDA/datastores). 
+*localID* is a local alias on the current Cloud instance for the session opened on remote datastore. If *localID* already exists on the instance, it is used. Otherwise, a new *localID* session is created when the datastore object is used. For a detailed description of remote session support on 4D Server, please refer to the [4D documentation](https://developer.4d.com/docs/ORDA/datastores). 
 
 Once the session is opened on the remote datastore, the following statements become equivalent and return a reference on the same datastore object:
 
