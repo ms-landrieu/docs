@@ -82,18 +82,17 @@ The configuration of parameters depends on the target datastore. In the current 
 
 - 4D Server 
 
-### Opening a 4D Server datastore
+#### 4D Server datastore
 
-Pass in *connectionInfo* an object describing the remote datastore you want to connect to. It can contain the following properties (all properties are optional except *hostname*):
+Pass in *connectionInfo* an object describing the 4D Server remote datastore you want to connect to. It can contain the following properties (all properties are optional except *hostname*):
 
 |Property| Type| Description|
 |---|---|---|
 |hostname|string|Name or IP address of the remote datastore + ":" + port number (port number is mandatory)|
 |user|string|User name (1)|
 |password|string|User password (1)|
-|idleTimeout|integer|Inactivity session timeout (in minutes), after which the session is automatically closed by Qodly. If omitted, default value is 60 (1h). The value cannot be < 60 (if a lower value is passed, the timeout is set to 60). For more information, see [Closing sessions](https://developer.4d.com/docs/ORDA/datastores#closing-sessions).|
+|idleTimeout|integer|Inactivity session timeout (in minutes), after which the session is automatically closed by 4D Server. If omitted, default value is 60 (1h). The value cannot be < 60 (if a lower value is passed, the timeout is set to 60). For more information, see [Closing sessions](https://developer.4d.com/docs/ORDA/datastores#closing-sessions).|
 |tls|boolean|Use secured connection (2). If omitted, false by default. Using a secured connection is recommended whenever possible.|
-|type |string |If passed, must be "4D Server"|
 
 (1) See the [4D Server documentation](https://developer.4d.com/docs/REST/authUsers) to know how to authenticate REST connection requests
 
@@ -132,10 +131,9 @@ Once the session is opened on the remote datastore, the following statements bec
 Connection to a remote datastore without user / password:
 
 ```qs
- var connectTo : object
+ var connectTo = {hostname : "192.168.18.11:8044"}
  var remoteDS : cs.DataStore
  var allStudents : cs.StudentsSelection
- connectTo = {type : "4D Server", hostname : "192.168.18.11:8044"}
  remoteDS = openDatastore(connectTo , "students")
  allStudents = remoteDS.Students.all() 
 ```
@@ -145,11 +143,10 @@ Connection to a remote datastore without user / password:
 Connection to a remote datastore with user / password / timeout / tls:
 
 ```qs
- var connectTo : object
+ var connectTo = {hostname : "192.168.18.11:4443", user : "marie",\  
+ 	password : "123", idleTimeout : 70 , tls : true}
  var remoteDS : cs.DataStore
  var allStudents : cs.StudentsSelection
- connectTo = {type : "4D Server", hostname : "192.168.18.11:4443",\  
- 	user : "marie", password : "pwd", idleTimeout : 70 , tls : true}
  remoteDS = openDatastore(connectTo , "students")
  allStudents = remoteDS.Students.all()
 ```
