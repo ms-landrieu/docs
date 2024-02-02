@@ -76,7 +76,7 @@ Using the datastore on the Qodly database:
 
 #### Description
 
-The `openDatastore` command <!-- REF #_command_.openDatastore.Summary -->connects the application to a remote datastore identified by the *connectionInfo* parameter<!-- END REF --> and returns a matching `cs.DataStore` object associated with the *localID* local alias. All objects exposed in the remote datastore are available as properties of the `cs.DataStore` returned object.
+The `openDatastore` command <!-- REF #_command_.openDatastore.Summary -->connects the application to a remote datastore identified by the *connectionInfo* parameter<!-- END REF --> and returns a matching `cs.DataStore` object associated with the *localID* alias on the Qodly Cloud instance. All objects exposed in the remote datastore are available as properties of the `cs.DataStore` returned object.
 
 The configuration of parameters depends on the target datastore. In the current Qodly implementation, the following target datastore type is supported:
 
@@ -135,7 +135,7 @@ Connection to a remote datastore without user / password:
  var connectTo : object
  var remoteDS : cs.DataStore
  var allStudents : cs.StudentsSelection
- connectTo = {"type","4D Server","hostname","192.168.18.11:8044"}
+ connectTo = {type : "4D Server", hostname : "192.168.18.11:8044"}
  remoteDS = openDatastore(connectTo , "students")
  allStudents = remoteDS.Students.all() 
 ```
@@ -148,28 +148,12 @@ Connection to a remote datastore with user / password / timeout / tls:
  var connectTo : object
  var remoteDS : cs.DataStore
  var allStudents : cs.StudentsSelection
- connectTo = {"type","4D Server","hostname","192.168.18.11:4443",\  
-  "user","marie","password",pwd,"idleTimeout",70,"tls",true}
+ connectTo = {type : "4D Server", hostname : "192.168.18.11:4443",\  
+ 	user : "marie", password : "pwd", idleTimeout : 70 , tls : true}
  remoteDS = openDatastore(connectTo , "students")
  allStudents = remoteDS.Students.all()
 ```
 
-#### Example 3  
-
-Working with several remote datastores:
-
-```qs
- var connectTo : object
- var frenchStudents, foreignStudents : cs.DataStore
- var allFrenchStudents, allForeignStudents : cs.StudentsSelection
-
- connectTo = {"hostname";"192.168.18.11:8044")
- $frenchStudents:=Open datastore($connectTo;"french")
- $connectTo.hostname:="192.168.18.11:8050"
- $foreignStudents:=Open datastore($connectTo;"foreign")
- ALERT("They are "+String($frenchStudents.Students.all().length)+" French students")
- ALERT("They are "+String($foreignStudents.Students.all().length)+" foreign students")
-```
 
 #### Error management  
 
