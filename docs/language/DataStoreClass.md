@@ -115,9 +115,9 @@ If no matching 4D Server database is found, `openDatastore` returns **null**.
 
 :::
 
-*localID* is a local alias on the current Cloud instance for the session opened on remote datastore. If *localID* already exists on the instance, it is used. Otherwise, a new *localID* session is created when the datastore object is used. For a detailed description of remote session support on 4D Server, please refer to the [4D documentation](https://developer.4d.com/docs/ORDA/datastores). 
+*localID* is a local alias on the current Cloud instance for the [session opened on remote 4D datastore](https://developer.4d.com/docs/ORDA/datastores#opening-sessions). If *localID* already exists on the instance, it is used. Otherwise, a new *localID* session is created when the datastore object is used. For a detailed description of remote session support on 4D Server, please refer to the [4D documentation](https://developer.4d.com/docs/ORDA/datastores). 
 
-Once the session is opened on the remote datastore, the following statements become equivalent and return a reference on the same datastore object:
+Once the session is opened on the remote 4D datastore, the following statements become equivalent and return a reference on the same datastore object:
 
 ```qs
  var mysd, myds2 : cs.DataStore
@@ -129,6 +129,7 @@ Once the session is opened on the remote datastore, the following statements bec
 #### Example 1  
 
 Connection to a remote datastore without user / password:
+
 
 ```qs
  var connectTo = {hostname : "192.168.18.11:8044"}
@@ -157,6 +158,9 @@ Connection to a remote datastore with user / password / timeout / tls:
 In case of error, the command returns **null**. If the remote datastore cannot be reached (wrong address, web server not started, http and https not enabled...), error 1610 "A remote request to host XXX has failed" is raised. You can intercept this error with a method installed by `onErrCall`.
 
 
+#### See also
+ 
+[Using a remote datastore](https://developer.4d.com/docs/ORDA/datastores) section on developer.4d.com.
 
 
 <!-- REF DataStoreClass.cancelTransaction().Desc -->
