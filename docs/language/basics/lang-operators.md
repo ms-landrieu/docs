@@ -321,3 +321,29 @@ Regarding values representing collections, objects, or strings, "empty" values a
 ```qs
 phone = emp.phone || "n/a"
 ```
+
+## Operator precedence
+
+Operator precedence determines how operators are parsed concerning each other. Operators with higher precedence become the operands of operators with lower precedence. In other words, it dictates the order in which expressions are evaluated. QodlyScript uses the same precedence rules as the most widely used languages, such as javascript or C++.
+
+Consider the following expression pattern, where both OP1 and OP2 are fill-in-the-blanks for OPerators.
+
+```
+a OP1 b OP2 c
+```
+
+If `OP1` and `OP2` have different precedence levels (see the table below), the operator with the higher precedence goes first and associativity does not matter. 
+
+Parentheses can be used to explicitly control the order of evaluation. See how multiplication has higher precedence than addition and executed first, even though addition is written first in the code:
+
+```qs
+var value = 3 + 10 * 2 // 23
+var value = 3 + (10 * 2) // 23, because parentheses here are superfluous
+var value = (3 + 10) * 2 // 26, because parentheses change the order
+```
+
+Within operators of the same precedence, the language groups them by associativity:
+
+- Left-associativity (left-to-right) means that it is interpreted as `(a OP1 b) OP2 c`
+- Right-associativity (right-to-left) means it is interpreted as a `OP1 (b OP2 c)`
+
