@@ -381,11 +381,10 @@ This table lists QodlyScript operators in order from highest precedence (16) to 
 |4|L|Logical AND `x && y`||
 |3|L|Logical OR `x || y`||
 |2|R|Ternary operator `x ? y : z`||
-|1|R|Ternary operator `x ? y : z`||
-||n/a|Assignment  `x = y`||
+|1|n/a|Assignment  `x = y`||
 ||n/a|Compound Assignment `x += y`||
 ||n/a|Compound Assignment `x -= y`||
 ||n/a|Compound Assignment `x *= y`||
 |0|n/a|Comma / Sequence `x , y`|(1)|
 
-(1) This is not an operator as in JavaScript, but a separator required by the syntax.
+(1) In QodlyScript, this is not an operator as in JavaScript, but a separator required by the syntax.
