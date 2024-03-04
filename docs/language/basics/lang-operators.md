@@ -3,9 +3,9 @@ id: lang-operators
 title: Operators
 ---
 
-An operator is a symbol or a group of symbols that you use to check, modify, or combine values. You are already familiar with many operators. For example, `1 + 2` uses the addition (or plus sign) operator to add two numbers together, and the result is 3. Comparison operators, like = or >, let you compare two or more values. 
+An operator is a symbol or a group of symbols that you use to check, modify, or combine values. You are already familiar with many operators. For example, `1 + 2` uses the addition (or plus sign) operator to add two numbers together, and the result is 3. Comparison operators, like = or >, let you compare two or more values.
 
-The QodlyScript language supports the operators you may already know from other languages like C or JavaScript. The assignment operator is `=` and the equal to operator is `==`. [Basic operators](#basic-operators) such as arithmetic operators (+, -, *, /, %...) and comparison operators ( = , >, >= ...) can be used with numbers, but also with boolean, text, date, time, or picture data types. Like JavaScript, the Qodly language supports the concept of [truthy and falsy values](#truthy-and-falsy), which in use in [short-cicrcuit operators](#short-circuit-operators). 
+The QodlyScript language supports the operators you may already know from other languages like C or JavaScript. The assignment operator is `=` and the equal to operator is `==`. [Basic operators](#basic-operators) such as arithmetic operators (+, -, *, /, %...) and comparison operators ( = , >, >= ...) can be used with numbers, but also with boolean, text, date, time, or picture data types. Like JavaScript, the Qodly language supports the concept of [truthy and falsy values](#truthy-and-falsy), which in use in [short-cicrcuit operators](#short-circuit-operators).
 
 
 ## Terminology
@@ -53,7 +53,7 @@ Operator results depend on the **data types** they are applied to. QodlyScript s
 QodlyScript provides **compound assignment operators** that combine assignment with another operation. One example is the addition assignment operator (`+ = `):
 
 ```qs
-a = 1 
+a = 1
 a+ = 2 // a = 3
 ```
 
@@ -90,7 +90,7 @@ These operators apply on any [assignable expressions](lang-expressions.md#assign
 The operation "source `operator` value" is not strictly equivalent to "source = source `operator` value" because the expression designating the source (variable, field, object property, collection element) is only evaluated once. For example, in such expression as `getPointer()->+ = 1` the `getPointer` method is called only once.
 
 > [Character indexing in text](lang-text.md#character-reference-symbols) and [byte indexing in blob](lang-blob.md#accessing-a-scalar-blobs-bytes) do not support these operators.
-> 
+>
 #### Examples
 
 ```qs
@@ -98,8 +98,8 @@ The operation "source `operator` value" is not strictly equivalent to "source = 
 x = 2
 x+ = 5 //x = 7
 
-t = "Hello" 
-t+ = " World" //t = "Hello World" 
+t = "Hello"
+t+ = " World" //t = "Hello World"
 
 d = !2000-11-10!
 d+ = 10 //d = !2000-11-20!
@@ -120,23 +120,23 @@ x3/ = 2 // x3 = 5
 x2 = 10
 x2* = 5 // x2 = 10
 
-t2 = "Hello" 
+t2 = "Hello"
 t2* = 2 // t2 = "HelloHello"
 
 ```
 
 
 
- 
+
 ## Short-circuit operators
 
-The **&&** and **||** operators are **short circuit operators**. A short circuit operator is one that doesn't necessarily evaluate all of its operands. 
+The **&&** and **||** operators are **short circuit operators**. A short circuit operator is one that doesn't necessarily evaluate all of its operands.
 
 The difference with the single [**&** and **|** boolean operators](lang-boolean.md#logical-operators) is that the short-circuit operators **&&** and **||** do not return a boolean value. They evaluate expressions as [truthy or falsy](#truthy-and-falsy), then return one of the expressions.
 
 ### Short-circuit AND operator (&&)
 
-The rule is as follows: 
+The rule is as follows:
 
 Given `Expr1 && Expr2`:
 
@@ -151,7 +151,7 @@ The following table summarizes the different cases for the **&&** operator:
 |falsy	|truthy	|Expr1|
 |falsy	|falsy	|Expr1|
 
-#### Example 1 
+#### Example 1
 
 ```qs
 var v : variant
@@ -165,11 +165,11 @@ v = 5 && 10 && "hello" //"hello"
 
 #### Example 2
 
-Say you have an online store, and some products have a tax rate applied, and others don't. 
+Say you have an online store, and some products have a tax rate applied, and others don't.
 
 To calculate the tax, you multiply the price by the tax rate, which may not have been specified.
 
-So you can write this: 
+So you can write this:
 
 ```qs
 var tax : variant
@@ -220,7 +220,7 @@ var phone : string
 phone = emp.phone || "n/a"
 ```
 
-In which case `phone` will store either a phone number or the "n/a" string. 
+In which case `phone` will store either a phone number or the "n/a" string.
 
 #### Example 2
 
@@ -245,13 +245,13 @@ This means that `a || b && c` is evaluated as `(a || b) && c`.
 
 The ternary conditional operator allows you to write one-line conditional expressions. For example, it can replace a full sequence of [if…else](lang-control-flow.md#ifelseend) statements.
 
-It takes three operands in the following order: 
+It takes three operands in the following order:
 
 * a condition followed by a question mark (?)
-* an expression to execute if the condition is [truthy](#truthy-and-falsy), followed by a colon (:) 
+* an expression to execute if the condition is [truthy](#truthy-and-falsy), followed by a colon (:)
 * an expression to execute if the condition is [falsy](#truthy-and-falsy)
 
-### Syntax 
+### Syntax
 
 The syntax is as follows:
 
@@ -285,7 +285,7 @@ fullname = (person.firstname && person.lastname) ? (person.firstname+" "+person.
 
 ## Truthy and falsy
 
-As well as a type, each value also has an inherent boolean value, generally known as either **truthy** or **falsy**. 
+As well as a type, each value also has an inherent boolean value, generally known as either **truthy** or **falsy**.
 
 > **truthy** and **falsy** values are only evaluated by [short-circuit](#short-circuit-operators) and [ternary](#ternary-operator) operators.
 
@@ -324,7 +324,7 @@ phone = emp.phone || "n/a"
 
 ## Operator precedence
 
-Operator precedence determines how operators are parsed concerning each other. Operators with higher precedence become the operands of operators with lower precedence. In other words, it dictates the order in which expressions are evaluated. QodlyScript uses the same precedence rules as the most widely used languages, such as javascript or C++.
+Operator precedence determines how operators are parsed concerning each other. Operators with higher precedence become the operands of operators with lower precedence. In other words, it dictates the order in which expressions are evaluated. Usually, QodlyScript uses the same precedence rules as the most widely used languages, such as JavaScript or C++.
 
 Consider the following expression pattern, where both OP1 and OP2 are fill-in-the-blanks for OPerators.
 
@@ -332,14 +332,12 @@ Consider the following expression pattern, where both OP1 and OP2 are fill-in-th
 a OP1 b OP2 c
 ```
 
-If `OP1` and `OP2` have different precedence levels (see the table below), the operator with the higher precedence goes first and associativity does not matter. 
-
-Parentheses can be used to explicitly control the order of evaluation. See how multiplication has higher precedence than addition and executed first, even though addition is written first in the code:
+If `OP1` and `OP2` have different precedence levels (see the table below), the operator with the higher precedence goes first and associativity does not matter. Parentheses can be used to explicitly control the order of evaluation. See how multiplication has higher precedence than addition and executed first, even though addition is written first in the code:
 
 ```qs
 var value = 3 + 10 * 2 // 23
 var value = 3 + (10 * 2) // 23, because parentheses here are superfluous
-var value = (3 + 10) * 2 // 26, because parentheses change the order
+var value = (3 + 10) * 2 // 26arnau, because parentheses change the order
 ```
 
 Within operators of the same precedence, the language groups them by associativity:
@@ -347,3 +345,47 @@ Within operators of the same precedence, the language groups them by associativi
 - Left-associativity (left-to-right) means that it is interpreted as `(a OP1 b) OP2 c`
 - Right-associativity (right-to-left) means it is interpreted as a `OP1 (b OP2 c)`
 
+### Operator table
+
+This table lists QodlyScript operators in order from highest precedence (16) to lowest precedence (1).
+
+| Precedence     |Associativity|Operators| Notes|
+|:-------------|:------------- |---|----|
+| 16       |  n/a |Grouping `(x)`||
+|15|L|Member access `x.y`||
+||L|Computed member access `x["y"]`||
+||L|Function call `x(y)`||
+|14|R|Unary negation `-x`||
+|13|R|Exponentiation `x^y`||
+||L|Division `x / y`||
+||L|Modulo `x % y`||
+||L|Longint division  `x \ y`||
+||L|Horizontal scaling `x *+ y`||
+|12|L|Vertical scaling `x *\| y`||
+|11|L|Addition `x + y`||
+||L|Substraction `x - y`||
+|10|L|Bitwise Left Shift `x << y`||
+||L|Bitwise Right Shift `x >> y`||
+||L|Bit set `x ?+ y`||
+||L|Bit clear `x ?- y`||
+||L|Bit test `x ?? y`||
+|9|L|Less than `x < y`||
+||L|Less than or equal `x <= y`||
+||L|Greater than `x > y`||
+||L|Greater than or equal `x >= y`||
+|8|L|Equality `x == y`||
+||L|Inequality `x != y`||
+|7|L|Bitwise AND `x & y`||
+|6|L|Bitwise XOR `x ^\| y`||
+|5|L|Bitwise OR `x \| y`||
+|4|L|Logical AND `x && y`||
+|3|L|Logical OR `x || y`||
+|2|R|Ternary operator `x ? y : z`||
+|1|R|Ternary operator `x ? y : z`||
+||n/a|Assignment  `x = y`||
+||n/a|Compound Assignment `x += y`||
+||n/a|Compound Assignment `x -= y`||
+||n/a|Compound Assignment `x *= y`||
+|0|n/a|Comma / Sequence `x , y`|(1)|
+
+(1) This is not an operator as in JavaScript, but a separator required by the syntax.
