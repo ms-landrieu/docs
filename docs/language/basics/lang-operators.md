@@ -234,13 +234,6 @@ var name: string
 name = person.maidenName || person.name
 ```
 
-### Precedence
-
-The `&&` and `||` operators have the same precedence as the logical operators `&` and `|`, and are evaluated left to right.
-
-This means that `a || b && c` is evaluated as `(a || b) && c`.
-
-
 ## Ternary operator
 
 The ternary conditional operator allows you to write one-line conditional expressions. For example, it can replace a full sequence of [if…else](lang-control-flow.md#ifelseend) statements.
@@ -332,59 +325,72 @@ Consider the following expression pattern, where both OP1 and OP2 are fill-in-th
 a OP1 b OP2 c
 ```
 
-If `OP1` and `OP2` have different precedence levels (see the table below), the operator with the higher precedence goes first and associativity does not matter. Parentheses can be used to explicitly control the order of evaluation. See how multiplication has higher precedence than addition and executed first, even though addition is written first in the code:
+If `OP1` and `OP2` have different precedence levels (see the table below), the operator with the higher precedence goes first and associativity does not matter.
+
+See how multiplication has higher precedence than addition and executed first, even though addition is written first in the code:
+
+```qs
+var value = 3 + 10 * 2 // 23
+```
+
+Parentheses can be used to explicitly control the order of evaluation. Parentheses can be nested inside other sets of parentheses. Be sure that each left parenthesis has a matching right parenthesis to ensure proper evaluation of expressions. Lack of, or incorrect use of parentheses can cause unexpected results or invalid expressions.
 
 ```qs
 var value = 3 + 10 * 2 // 23
 var value = 3 + (10 * 2) // 23, because parentheses here are superfluous
-var value = (3 + 10) * 2 // 26arnau, because parentheses change the order
+var value = (3 + 10) * 2 // 26, because parentheses change the order
 ```
 
 Within operators of the same precedence, the language groups them by associativity:
 
-- Left-associativity (left-to-right) means that it is interpreted as `(a OP1 b) OP2 c`
-- Right-associativity (right-to-left) means it is interpreted as a `OP1 (b OP2 c)`
+- Left-associativity (left-to-right, "L" in the table below) means that it is interpreted as `(a OP1 b) OP2 c`
+- Right-associativity (right-to-left, "R" in the table below) means it is interpreted as a `OP1 (b OP2 c)`
 
 ### Operator table
 
 This table lists QodlyScript operators in order from highest precedence (16) to lowest precedence (1).
 
-| Precedence     |Associativity|Operators| Notes|
-|:-------------|:------------- |---|----|
-| 16       |  n/a |Grouping `(x)`||
-|15|L|Member access `x.y`||
-||L|Computed member access `x["y"]`||
-||L|Function call `x(y)`||
-|14|R|Unary negation `-x`||
-|13|R|Exponentiation `x^y`||
-||L|Division `x / y`||
-||L|Modulo `x % y`||
-||L|Longint division  `x \ y`||
-||L|Horizontal scaling `x *+ y`||
-|12|L|Vertical scaling `x *\| y`||
-|11|L|Addition `x + y`||
-||L|Substraction `x - y`||
-|10|L|Bitwise Left Shift `x << y`||
-||L|Bitwise Right Shift `x >> y`||
-||L|Bit set `x ?+ y`||
-||L|Bit clear `x ?- y`||
-||L|Bit test `x ?? y`||
-|9|L|Less than `x < y`||
-||L|Less than or equal `x <= y`||
-||L|Greater than `x > y`||
-||L|Greater than or equal `x >= y`||
-|8|L|Equality `x == y`||
-||L|Inequality `x != y`||
-|7|L|Bitwise AND `x & y`||
-|6|L|Bitwise XOR `x ^\| y`||
-|5|L|Bitwise OR `x \| y`||
-|4|L|Logical AND `x && y`||
-|3|L|Logical OR `x || y`||
-|2|R|Ternary operator `x ? y : z`||
-|1|n/a|Assignment  `x = y`||
-||n/a|Compound Assignment `x += y`||
-||n/a|Compound Assignment `x -= y`||
-||n/a|Compound Assignment `x *= y`||
-|0|n/a|Comma / Sequence `x , y`|(1)|
+| Precedence     |Associativity|Operators|
+|:-------------|:------------- |---|
+| 16       |  n/a |Grouping `(x)`|
+|15|L|[Member access](lang-object.md#object-properties) `x.y`|
+||L|[Computed member access](lang-object.md#object-properties) `x["y"]`|
+||L|[Function call](../FunctionClass.md#formula-objects) `x(y)`|
+|14|R|[Unary negation](lang-number.md#numeric-literals) `-x`|
+|13|R|[Exponentiation](lang-number.md#numeric-operators) `x^y`|
+||L|[Division](lang-number.md#numeric-operators) `x / y`|
+||L|[Modulo](lang-number.md#numeric-operators) `x % y`|
+||L|[Longint division](lang-number.md#numeric-operators)  `x \ y`|
+||L|[Horizontal scaling](lang-picture.md#picture-operators) `x *+ y`|
+|12|L|[Vertical scaling](lang-picture.md#picture-operators) `x *\| y`|
+|11|L|[Addition](lang-number.md#numeric-operators) `x + y`|
+||L|[Substraction](lang-number.md#numeric-operators) `x - y`|
+|10|L|[Bitwise Left Shift](lang-number.md#bitwise-operators) `x << y`|
+||L|[Bitwise Right Shift](lang-number.md#bitwise-operators) `x >> y`|
+||L|[Bit set](lang-number.md#bitwise-operators) `x ?+ y`|
+||L|[Bit clear](lang-number.md#bitwise-operators) `x ?- y`|
+||L|[Bit test](lang-number.md#bitwise-operators) `x ?? y`|
+|9|L|[Less than](lang-number.md#numeric-operators) `x < y`|
+||L|[Less than or equal to](lang-number.md#numeric-operators) `x <= y`|
+||L|[Greater than](lang-number.md#numeric-operators) `x > y`|
+||L|[Greater than or equal to](lang-number.md#numeric-operators) `x >= y`|
+|8|L|[Equality](lang-number.md#numeric-operators) `x == y`|
+||L|[Inequality](lang-number.md#numeric-operators) `x != y`|
+|7|L|[Bitwise AND](lang-number.md#bitwise-operators) `x & y`|
+|6|L|[Bitwise XOR](lang-number.md#bitwise-operators) `x ^\| y`|
+|5|L|[Bitwise OR](lang-number.md#bitwise-operators) `x \| y`|
+|4|L|[Logical AND](lang-number.md#bitwise-operators) `x && y`|
+|3|L|[Logical OR](lang-number.md#bitwise-operators) `x \|\| y`|
+|2|R|[Ternary operator](#ternary-operator) `x ? y : z`|
+|1|n/a|[Assignment](lang-variables.md#assigning-data) `x = y`|
+||n/a|[Compound Assignment](#compound-assignment-operators) `x += y`|
+||n/a|[Compound Assignment](#compound-assignment-operators) `x -= y`|
+||n/a|[Compound Assignment](#compound-assignment-operators) `x *= y`|
+|0|n/a|[Comma / Sequence](lang-parameters.md#declaring-parameters) `x , y`|
 
-(1) In QodlyScript, this is not an operator as in JavaScript, but a separator required by the syntax.
+:::note Notes
+
+- Most of arithmetic and comparison operators can be used with numeric, date, time, or string values.
+- In QodlyScript, the comma is not an operator like in JavaScript, but a separator required by the syntax.
+
+:::
