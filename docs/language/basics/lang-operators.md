@@ -319,7 +319,7 @@ phone = emp.phone || "n/a"
 
 Operator precedence determines how operators are parsed concerning each other. Operators with higher precedence become the operands of operators with lower precedence. In other words, it dictates the order in which expressions are evaluated. Usually, QodlyScript uses the same precedence rules as the most widely used languages, such as JavaScript or C++.
 
-Consider the following expression pattern, where both OP1 and OP2 are fill-in-the-blanks for OPerators.
+Consider the following expression pattern, where both OP1 and OP2 are placeholders for operators.
 
 ```
 a OP1 b OP2 c
@@ -386,11 +386,52 @@ This table lists QodlyScript operators in order from highest precedence (16) to 
 ||n/a|[Compound Assignment](#compound-assignment-operators) `x += y`|
 ||n/a|[Compound Assignment](#compound-assignment-operators) `x -= y`|
 ||n/a|[Compound Assignment](#compound-assignment-operators) `x *= y`|
-|0|n/a|[Comma / Sequence](lang-parameters.md#declaring-parameters) `x , y`|
 
-:::note Notes
+<table>
+		<tr>
+				<th>Precedence</th>
+				<th>Associativity</th>
+				<th>Operators</th>
+		</tr>
+		<tr><td>16</td><td>n/a</td><td>Grouping <code>(x)</code></td></tr>
+		<tr><td rowspan="3">15</td><td>L</td><td>[Member access](lang-object.md#object-properties) <code>x.y</code></td></tr>
+		<tr><td>L</td><td>[Computed member access](lang-object.md#object-properties) <code>x["y"]</code></td></tr>
+		<tr><td>L</td><td>[Function call](../FunctionClass.md#formula-objects) <code>x(y)</code></td></tr>
+		<tr><td>14</td><td>R</td><td>[Unary negation](lang-number.md#numeric-literals) <code>-x</code></td></tr>
+		<tr><td rowspan="5">13</td><td>R</td><td>[Exponentiation](lang-number.md#numeric-operators) <code>x^y</code></td></tr>
+		<tr><td>L</td><td>[Division](lang-number.md#numeric-operators) <code>x / y</code></td></tr>
+		<tr><td>L</td><td>[Modulo](lang-number.md#numeric-operators) <code>x % y</code></td></tr>
+		<tr><td>L</td><td>[Longint division](lang-number.md#numeric-operators)  <code>x \ y</code></td></tr>
+		<tr><td>L</td><td>[Horizontal scaling](lang-picture.md#picture-operators) <code>pict *+ y</code></td></tr>
+		<tr><td>12</td><td>L</td><td>[Vertical scaling](lang-picture.md#picture-operators) <code>pict *\| y</code></td></tr>
+		<tr><td rowspan="2">11</td><td>L</td><td>[Addition](lang-number.md#numeric-operators) <code>x + y</code></td></tr>
+		<tr><td>L</td><td>[Substraction](lang-number.md#numeric-operators) <code>x - y</code></td></tr>
+		<tr><td rowspan="5">10</td><td>L</td><td>[Bitwise Left Shift](lang-number.md#bitwise-operators) <code>x &lt;&lt; y</code></td></tr>
+		<tr><td>L</td><td>[Bitwise Right Shift](lang-number.md#bitwise-operators) <code>x &gt;&gt; y</code></td></tr>
+		<tr><td>L</td><td>[Bit set](lang-number.md#bitwise-operators) <code>x ?+ y</code></td></tr>
+		<tr><td>L</td><td>[Bit clear](lang-number.md#bitwise-operators) <code>x ?- y</code></td></tr>
+		<tr><td>L</td><td>[Bit test](lang-number.md#bitwise-operators) <code>x ?? y</code></td></tr>
+		<tr><td rowspan="4">9</td><td>L</td><td>[Less than](lang-number.md#numeric-operators) <code>x &lt; y</code></td></tr>
+		<tr><td>L</td><td>[Less than or equal to](lang-number.md#numeric-operators) <code>x &lt;= y</code></td></tr>
+		<tr><td>L</td><td>[Greater than](lang-number.md#numeric-operators) <code>x &gt; y</code></td></tr>
+		<tr><td>L</td><td>[Greater than or equal to](lang-number.md#numeric-operators) <code>x >&gt;= y</code></td></tr>
+		<tr><td rowspan="2">8</td><td>L</td><td>[Equality](lang-number.md#numeric-operators) <code>x == y</code></td></tr>
+		<tr><td>L</td><td>[Inequality](lang-number.md#numeric-operators) <code>x != y</code></td></tr>
+		<tr><td>7</td><td>L</td><td>[Bitwise AND](lang-number.md#bitwise-operators) <code>x & y</code></td></tr>
+		<tr><td>6</td><td>L</td><td>[Bitwise XOR](lang-number.md#bitwise-operators) <code>x ^| y</code></td></tr>
+		<tr><td>5</td><td>L</td><td>[Bitwise OR](lang-number.md#bitwise-operators) <code>x | y</code></td></tr>
+		<tr><td>4</td><td>L</td><td>[Logical AND](lang-number.md#bitwise-operators) <code>x && y</code></td></tr>
+		<tr><td>3</td><td>L</td><td>[Logical OR](lang-number.md#bitwise-operators) <code>x || y</code></td></tr>
+		<tr><td>2</td><td>R</td><td>[Ternary operator](#ternary-operator) <code>x ? y : z</code></td></tr>
+		<tr><td rowspan="4">1</td><td>n/a</td><td>|[Assignment](lang-variables.md#assigning-data) <code>x = y</code></td></tr>
+		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x += y</code></td></tr>
+		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x -= y</code></td></tr>
+		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x *= y</code></td></tr>
+</table>
 
-- Most of arithmetic and comparison operators can be used with numeric, date, time, or string values.
-- In QodlyScript, the comma is not an operator like in JavaScript, but a separator required by the syntax.
+
+:::note
+
+Most of arithmetic and comparison operators can be used with numeric, date, time, or string values.
 
 :::
