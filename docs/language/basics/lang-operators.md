@@ -208,6 +208,7 @@ The following table summarizes the different cases and the value returned for th
 |truthy	|truthy	|Expr1|
 |truthy	|falsy	|Expr1|
 |falsy	|truthy	|Expr2|
+
 |falsy	|falsy	|Expr2|
 
 #### Example 1
@@ -319,7 +320,7 @@ phone = emp.phone || "n/a"
 
 Operator precedence determines how operators are parsed concerning each other. Operators with higher precedence become the operands of operators with lower precedence. In other words, it dictates the order in which expressions are evaluated. Usually, QodlyScript uses the same precedence rules as the most widely used languages, such as JavaScript or C++.
 
-Consider the following expression pattern, where both OP1 and OP2 are placeholders for operators.
+Consider the following expression pattern, where both `OP1` and `OP2` are placeholders for operators.
 
 ```
 a OP1 b OP2 c
@@ -350,42 +351,6 @@ Within operators of the same precedence, the language groups them by associativi
 
 This table lists QodlyScript operators in order from highest precedence (16) to lowest precedence (1).
 
-| Precedence     |Associativity|Operators|
-|:-------------|:------------- |---|
-| 16       |  n/a |Grouping `(x)`|
-|15|L|[Member access](lang-object.md#object-properties) `x.y`|
-||L|[Computed member access](lang-object.md#object-properties) `x["y"]`|
-||L|[Function call](../FunctionClass.md#formula-objects) `x(y)`|
-|14|R|[Unary negation](lang-number.md#numeric-literals) `-x`|
-|13|R|[Exponentiation](lang-number.md#numeric-operators) `x^y`|
-||L|[Division](lang-number.md#numeric-operators) `x / y`|
-||L|[Modulo](lang-number.md#numeric-operators) `x % y`|
-||L|[Longint division](lang-number.md#numeric-operators)  `x \ y`|
-||L|[Horizontal scaling](lang-picture.md#picture-operators) `x *+ y`|
-|12|L|[Vertical scaling](lang-picture.md#picture-operators) `x *\| y`|
-|11|L|[Addition](lang-number.md#numeric-operators) `x + y`|
-||L|[Substraction](lang-number.md#numeric-operators) `x - y`|
-|10|L|[Bitwise Left Shift](lang-number.md#bitwise-operators) `x << y`|
-||L|[Bitwise Right Shift](lang-number.md#bitwise-operators) `x >> y`|
-||L|[Bit set](lang-number.md#bitwise-operators) `x ?+ y`|
-||L|[Bit clear](lang-number.md#bitwise-operators) `x ?- y`|
-||L|[Bit test](lang-number.md#bitwise-operators) `x ?? y`|
-|9|L|[Less than](lang-number.md#numeric-operators) `x < y`|
-||L|[Less than or equal to](lang-number.md#numeric-operators) `x <= y`|
-||L|[Greater than](lang-number.md#numeric-operators) `x > y`|
-||L|[Greater than or equal to](lang-number.md#numeric-operators) `x >= y`|
-|8|L|[Equality](lang-number.md#numeric-operators) `x == y`|
-||L|[Inequality](lang-number.md#numeric-operators) `x != y`|
-|7|L|[Bitwise AND](lang-number.md#bitwise-operators) `x & y`|
-|6|L|[Bitwise XOR](lang-number.md#bitwise-operators) `x ^\| y`|
-|5|L|[Bitwise OR](lang-number.md#bitwise-operators) `x \| y`|
-|4|L|[Logical AND](lang-number.md#bitwise-operators) `x && y`|
-|3|L|[Logical OR](lang-number.md#bitwise-operators) `x \|\| y`|
-|2|R|[Ternary operator](#ternary-operator) `x ? y : z`|
-|1|n/a|[Assignment](lang-variables.md#assigning-data) `x = y`|
-||n/a|[Compound Assignment](#compound-assignment-operators) `x += y`|
-||n/a|[Compound Assignment](#compound-assignment-operators) `x -= y`|
-||n/a|[Compound Assignment](#compound-assignment-operators) `x *= y`|
 
 <table>
 		<tr>
@@ -394,39 +359,39 @@ This table lists QodlyScript operators in order from highest precedence (16) to 
 				<th>Operators</th>
 		</tr>
 		<tr><td>16</td><td>n/a</td><td>Grouping <code>(x)</code></td></tr>
-		<tr><td rowspan="3">15</td><td>L</td><td>[Member access](lang-object.md#object-properties) <code>x.y</code></td></tr>
-		<tr><td>L</td><td>[Computed member access](lang-object.md#object-properties) <code>x["y"]</code></td></tr>
-		<tr><td>L</td><td>[Function call](../FunctionClass.md#formula-objects) <code>x(y)</code></td></tr>
-		<tr><td>14</td><td>R</td><td>[Unary negation](lang-number.md#numeric-literals) <code>-x</code></td></tr>
-		<tr><td rowspan="5">13</td><td>R</td><td>[Exponentiation](lang-number.md#numeric-operators) <code>x^y</code></td></tr>
-		<tr><td>L</td><td>[Division](lang-number.md#numeric-operators) <code>x / y</code></td></tr>
-		<tr><td>L</td><td>[Modulo](lang-number.md#numeric-operators) <code>x % y</code></td></tr>
-		<tr><td>L</td><td>[Longint division](lang-number.md#numeric-operators)  <code>x \ y</code></td></tr>
-		<tr><td>L</td><td>[Horizontal scaling](lang-picture.md#picture-operators) <code>pict *+ y</code></td></tr>
-		<tr><td>12</td><td>L</td><td>[Vertical scaling](lang-picture.md#picture-operators) <code>pict *\| y</code></td></tr>
-		<tr><td rowspan="2">11</td><td>L</td><td>[Addition](lang-number.md#numeric-operators) <code>x + y</code></td></tr>
-		<tr><td>L</td><td>[Substraction](lang-number.md#numeric-operators) <code>x - y</code></td></tr>
-		<tr><td rowspan="5">10</td><td>L</td><td>[Bitwise Left Shift](lang-number.md#bitwise-operators) <code>x &lt;&lt; y</code></td></tr>
-		<tr><td>L</td><td>[Bitwise Right Shift](lang-number.md#bitwise-operators) <code>x &gt;&gt; y</code></td></tr>
-		<tr><td>L</td><td>[Bit set](lang-number.md#bitwise-operators) <code>x ?+ y</code></td></tr>
-		<tr><td>L</td><td>[Bit clear](lang-number.md#bitwise-operators) <code>x ?- y</code></td></tr>
-		<tr><td>L</td><td>[Bit test](lang-number.md#bitwise-operators) <code>x ?? y</code></td></tr>
-		<tr><td rowspan="4">9</td><td>L</td><td>[Less than](lang-number.md#numeric-operators) <code>x &lt; y</code></td></tr>
-		<tr><td>L</td><td>[Less than or equal to](lang-number.md#numeric-operators) <code>x &lt;= y</code></td></tr>
-		<tr><td>L</td><td>[Greater than](lang-number.md#numeric-operators) <code>x &gt; y</code></td></tr>
-		<tr><td>L</td><td>[Greater than or equal to](lang-number.md#numeric-operators) <code>x >&gt;= y</code></td></tr>
-		<tr><td rowspan="2">8</td><td>L</td><td>[Equality](lang-number.md#numeric-operators) <code>x == y</code></td></tr>
-		<tr><td>L</td><td>[Inequality](lang-number.md#numeric-operators) <code>x != y</code></td></tr>
-		<tr><td>7</td><td>L</td><td>[Bitwise AND](lang-number.md#bitwise-operators) <code>x & y</code></td></tr>
-		<tr><td>6</td><td>L</td><td>[Bitwise XOR](lang-number.md#bitwise-operators) <code>x ^| y</code></td></tr>
-		<tr><td>5</td><td>L</td><td>[Bitwise OR](lang-number.md#bitwise-operators) <code>x | y</code></td></tr>
-		<tr><td>4</td><td>L</td><td>[Logical AND](lang-number.md#bitwise-operators) <code>x && y</code></td></tr>
-		<tr><td>3</td><td>L</td><td>[Logical OR](lang-number.md#bitwise-operators) <code>x || y</code></td></tr>
-		<tr><td>2</td><td>R</td><td>[Ternary operator](#ternary-operator) <code>x ? y : z</code></td></tr>
-		<tr><td rowspan="4">1</td><td>n/a</td><td>|[Assignment](lang-variables.md#assigning-data) <code>x = y</code></td></tr>
-		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x += y</code></td></tr>
-		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x -= y</code></td></tr>
-		<tr><td>n/a</td><td>[Compound Assignment](#compound-assignment-operators) <code>x *= y</code></td></tr>
+		<tr><td rowspan="3">15</td><td>L</td><td><a href="lang-object.html#object-properties">Member access</a> <code>x.y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-object.html#object-properties">Computed member access</a> <code>x["y"]</code></td></tr>
+		<tr><td>L</td><td><a href="../FunctionClass.html#formula-objects">Function call</a> <code>x(y)</code></td></tr>
+		<tr><td>14</td><td>R</td><td><a href="lang-number.html#numeric-literals">Unary negation</a> <code>-x</code></td></tr>
+		<tr><td rowspan="5">13</td><td>R</td><td><a href="lang-number.html#numeric-operators">Exponentiation</a> <code>x^y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Division</a> <code>x / y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Modulo</a> <code>x % y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Longint division</a> <code>x \ y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-picture.html#picture-operators">Horizontal scaling</a> <code>pict *+ y</code></td></tr>
+		<tr><td>12</td><td>L</td><td><a href="lang-picture.html#picture-operators">Vertical scaling</a> <code>pict *| y</code></td></tr>
+		<tr><td rowspan="2">11</td><td>L</td><td><a href="lang-number.html#numeric-operators">Addition</a> <code>x + y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Substraction</a> <code>x - y</code></td></tr>
+		<tr><td rowspan="5">10</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Bitwise Left Shift</a> <code>x &lt;&lt; y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#bitwise-operators">Bitwise Right Shift</a> <code>x &gt;&gt; y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#bitwise-operators">Bit set</a> <code>x ?+ y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#bitwise-operators">Bit clear</a> <code>x ?- y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#bitwise-operators">Bit test</a> <code>x ?? y</code></td></tr>
+		<tr><td rowspan="4">9</td><td>L</td><td><a href="lang-number.html#numeric-operators">Less than </a> <code>x &lt; y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Less than or equal to</a> <code>x &lt;= y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Greater than</a> <code>x &gt; y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Greater than or equal to</a> <code>x &gt;= y</code></td></tr>
+		<tr><td rowspan="2">8</td><td>L</td><td><a href="lang-number.html#numeric-operators">Equality</a> <code>x == y</code></td></tr>
+		<tr><td>L</td><td><a href="lang-number.html#numeric-operators">Inequality</a> <code>x != y</code></td></tr>
+		<tr><td>7</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Bitwise AND</a> <code>x & y</code></td></tr>
+		<tr><td>6</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Bitwise XOR</a> <code>x ^| y</code></td></tr>
+		<tr><td>5</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Bitwise OR</a> <code>x | y</code></td></tr>
+		<tr><td>4</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Logical AND</a> <code>x && y</code></td></tr>
+		<tr><td>3</td><td>L</td><td><a href="lang-number.html#bitwise-operators">Logical OR</a> <code>x || y</code></td></tr>
+		<tr><td>2</td><td>R</td><td><a href="#ternary-operator">Ternary operator</a> <code>x ? y : z</code></td></tr>
+		<tr><td rowspan="4">1</td><td>n/a</td><td><a href="lang-variables.html#assigning-data">Assignment</a> <code>x = y</code></td></tr>
+		<tr><td>n/a</td><td><a href="#compound-assignment-operators">Compound Assignment</a> <code>x += y</code></td></tr>
+		<tr><td>n/a</td><td><a href="#compound-assignment-operators">Compound Assignment</a> <code>x -= y</code></td></tr>
+		<tr><td>n/a</td><td><a href="#compound-assignment-operators">Compound Assignment</a> <code>x *= y</code></td></tr>
 </table>
 
 
