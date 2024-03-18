@@ -1,14 +1,56 @@
 ---
-id: quickstart
-title: Quickstart
+id: my-first-app
+title: My First Qodly Application
 ---
 
-To begin your Qodly experience, follow these steps to create an account on the Qodly Central Management Console (QCMC) and explore the Sandbox environment.
+Welcome to Qodly! In this Quickstart Guide, you will see how fast it can be to create, design, and run a Qodly application. In less than 30 minutes, you will be able to:
+
+- design a simple data model with two dataclasses (User and Address),
+- add users including their personal information,
+- display a featured list of users,
+- use buttons to select, sort, or delete users,
+- include a search area.
+
+:::info
+
+This example is inspired from the **CRUD Demo** application that you can select when creating a new Qodly application. Feel free to select and browse this application to see the final result we would like to obtain.
+
+<img alt="explorer" src={require('./img/demo1.png').default} style={{borderRadius: '6px', borderColor: '#1D1B49', borderStyle: 'solid'}} />
+
+:::
+
+## Creating the Model
+
+The model describes which information will be stored in the application and how it will be organised.  
+
+We will create two dataclasses: **User** to store user information such as name, phone number, etc., and **Address** to store address information such as street number, city, etc. Both dataclasses will be **related**, since a User has at an address, and an Address can belong to one or more users.
 
 
-## Step 1: Create your account
+### Step 1: Opening Qodly Studio
 
-1. Go to [**cloud.qodly.com/signup**](https://cloud.qodly.com/signup) and create your account in a few clicks. 
+1. Go through the [Quickstart section](quickstart.md) to create your sandbox environment (select the [**Blank app template**](quickstart.md#step-2-set-up-your-sandbox-and-environment)) and open Qodly Studio.
+
+<img alt="explorer" src={require('./img/demo2.png').default} style={{borderRadius: '6px', borderColor: '#1D1B49', borderStyle: 'solid'}} />
+
+
+2. Click **Skip** to close the Welcome Tour if necessary.
+
+3. In the Explorer area, click on **Model** to open the Model editor.
+
+The Model editor opens, empty by default.
+
+
+### Step 2: Creating the Dataclasses
+
+1. Click on the **+** button of the "DataStore Classes" area to create your first dataclass:
+
+<img alt="explorer" src={require('./img/demo3.png').default} style={{borderRadius: '6px', borderColor: '#1D1B49', borderStyle: 'solid'}} />
+
+2. Name it "User".
+
+<img alt="explorer" src={require('./img/demo4.png').default} style={{borderRadius: '6px', borderColor: '#1D1B49', borderStyle: 'solid'}} />
+
+1. Go to [**cloud.qodly.com/signup**](https://cloud.qodly.com/signup) and create your account in a few clicks.
 
     <img alt="explorer" src={require('./img/qs1.png').default} style={{borderRadius: '6px', height: '30%', width: '30%', borderColor: '#1D1B49', borderStyle: 'solid'}} />
 
@@ -52,9 +94,9 @@ With the development environment ready, it's time to access Qodly Studio and fol
 1. Click on the name of your sandbox application:
 
    <img alt="explorer" src={require('./img/qs6.png').default} style={{borderRadius: '6px', height:'70%', width: '70%', borderColor: '#1D1B49', borderStyle: 'solid'}} />
-    
+
 2. You access its Overview page, allowing you to monitor its environments and activity. Click the **Studio** button on the upper right side of the page:
-    
+
    <img alt="explorer" src={require('./img/qs5bis.png').default} style={{borderRadius: '6px', borderColor: '#1D1B49', borderStyle: 'solid'}} />
 
 
@@ -66,7 +108,7 @@ With the development environment ready, it's time to access Qodly Studio and fol
 
     :::note
 
-    You can skip or reactivate the Welcome Tour anytime through [Qodly Studio Settings](../studio/settings.md#activate-welcome-tour). 
+    You can skip or reactivate the Welcome Tour anytime through [Qodly Studio Settings](../studio/settings.md#activate-welcome-tour).
 
     <img alt="explorer" src={require('./img/qs8.png').default} style={{borderRadius: '6px', height: '50%', width: '50%'}} />
 
@@ -76,6 +118,6 @@ With the development environment ready, it's time to access Qodly Studio and fol
 
 :::tip
 
-To learn more, feel free to explore our [**Youtube Channel**](https://www.youtube.com/channel/UCLNHKvjJQZ_5D1ziskba6jg). 
+To learn more, feel free to explore our [**Youtube Channel**](https://www.youtube.com/channel/UCLNHKvjJQZ_5D1ziskba6jg).
 
 :::
